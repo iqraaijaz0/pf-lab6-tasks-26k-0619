@@ -1,0 +1,49 @@
+#include <stdio.h>
+
+int main() {
+    int total_containers;
+    printf("Enter total containers today: ");
+    scanf("%d", &total_containers);
+
+    for (int i = 1; i <= total_containers; i++) {
+        int weight, type;
+        printf("Enter weight (kg): ");
+        scanf("%d", &weight);
+        printf("Enter type (1 for General, 2 for Hazardous, 3 for Refrigerated): ");
+        scanf("%d", &type);
+
+        int allowed = 0;
+
+        switch (type) {
+            case 1:
+                if (weight <= 20000) {
+                    allowed = 1;
+                }
+                break;
+            case 2:
+                if (weight <= 15000 && i % 2 != 0) {
+                    allowed = 1;
+                }
+                break;
+            case 3:
+                if (weight <= 18000) {
+                    allowed = 1;
+                }
+                break;
+            default:
+                break;
+        }
+
+        if (allowed == 1) {
+            printf("Container %d: LOADED\n", i);
+        } else {
+            printf("Container %d: REJECTED\n", i);
+        }
+
+        int rem1 = weight % 97;
+        int track_code = rem1 % 100;
+        printf("Tracking Code: %02d\n\n", track_code);
+    }
+
+    return 0;
+}
